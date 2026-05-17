@@ -1,68 +1,7 @@
 
 
 
-
-
-# class Robot: 
-#     def __init__(self, name, move1, move2, move3,move4 ):
-#         self.name = name
-#         self.move1 = move1
-#         self.move2 = move2
-#         self.move3 = move3
-#         self.move4 = move4
-#         self.memory = [ 1,0,0,1,1,0,1,1,1 ]
-
-
-#     def add (self,value):
-#         self.memory.append(value)
-#         self.content = (f"{self.name} add value {value}")
-#         print (self.content)
-#         return self.content
-        
-            
-
-#     def my_robot(self):
-#         self.command1 = (f"My robot - {self.name} do moves -  {self.move1}, {self.move2}, {self.move3}, {self.move4}, SM - {self.memory}")
-#         print (self.command1)
-#         return self.command1
-
-#     def start_system1(self, method = "procedure"):
-#         self.command2 =  (f"{self.name} Start system by {method} ")
-#         print (self.command2)
-#         return self.command2     
-    
-#     def start_system2(self, method = "auto"):
-#         self.command3 =  (f"{self.name} Start system by {method} ")
-#         print (self.command3)
-#         return self.command3     
-
-
-
-#     def diagnostic(self):
-#         choose_method = input("Chose method of  diagnostic \n-auto \n-manual :")
-#         if choose_method == "auto":
-#             print("auto initializing")
-#         if choose_method == "manual":
-#             print("use manual diagno steps ")    
-
-
-# rob1 = Robot("Robo1", "left", "right", "up", "down" )
-# rob2 = Robot("Robo2", "up","down","left","right")
-
-# rob1.add(10)
-# rob2.add(20)
-
-# rob1.my_robot()
-# rob2.my_robot()
-
-# rob1.start_system1()
-# rob2.start_system2()
-
-# rob1.diagnostic() 
-
-
-
-######    ROBO    $$$$$$
+######    ROBO    ######
 
 
 
