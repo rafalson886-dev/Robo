@@ -1,5 +1,5 @@
 # Robo #
-project of robo simualtion
+part of project robo simulation
 
 Simple OOP project in Python.
 
