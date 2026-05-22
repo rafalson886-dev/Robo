@@ -3,6 +3,7 @@
 
 ######    ROBO    ######
 
+
 mapa = [[0]*100 for _ in range(100)]
 
 
@@ -208,28 +209,43 @@ class Military_Robot(Robot):
             "plasma": 100
                       }
     
+    
+
+    def attack(self, target, weapon):
+
+        damage = {
+        "laser": 1,     
+        "cannon": 2,
+        "plasma": 4
+    }
+        
+        
+
+        if weapon in damage:
+
+            print(f"{self.name} attacks {target.name} with {weapon}")
+
+        
+            self.weapon[weapon] -= 1
+            print (f"Ammo remain - {self.weapon}")
+
+        
+            target.hull_integrity = max(0,target.hull_integrity - damage[weapon])
+
+            
+        
+        else:
+            print("invalid weapon")
+
+          
+
+        
+    
+        
     def special_action(self):
         self.hull_integrity +=40
         self.energy -= 30
         
-
-    def attack (self,weapon ):
-        damage= {
-            "laser":1,
-            "cannon":2,
-            "plasma":4
-             }
-
-    
-         
-
-
-        self.weapon[weapon] -= 1  
-
-        self.hull_integrity = max(0, self.hull_integrity - damage[weapon])
-    
-        
-    
 
 
 
@@ -239,7 +255,7 @@ class Military_Robot(Robot):
         return self.hull_integrity
                 
     def military_robot (self):
-        self.command5 = (f"My military robot - {self.name}  has {self.energy} , hull integrity = {self.hull_integrity}%  shield - {self.shield} cells \
+        self.command5 = (f"My military robot - {self.name}  has {self.energy} energy , hull integrity = {self.hull_integrity}%  shield - {self.shield} cells \
         , do moves - {self.moves} and SM - {self.memory} has self weapon - {self.weapon} ")
         print(self.command5)
        
@@ -249,8 +265,8 @@ class Military_Robot(Robot):
 mil1 = Military_Robot("Robo1") 
 mil2 = Military_Robot("Robo2")
 
-mil2.autodestruction()
 
+mil1.attack(mil2,"plasma")
 mil1.military_robot()
 mil2.military_robot()
 
@@ -260,7 +276,6 @@ robots = [rob1, rob2, med1, med2, mil1, mil2 ]
 for robot in robots:
     if robot.is_alive():
         robot.special_action()
-
         
 
 
