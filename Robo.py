@@ -40,7 +40,7 @@ class Robot:
 
 
     def my_robot(self):
-        self.command1 = (f"My robot - {self.name}  has {self.energy} HP, hull indegrity = {self.hull_integrity} %, do moves - {self.moves} and SM - {self.memory}")
+        self.command1 = (f"My robot - {self.name}  has {self.energy} HP, hull integrity = {self.hull_integrity} %, do moves - {self.moves} and SM - {self.memory}")
         print (self.command1)
         return self.command1
 
@@ -71,9 +71,12 @@ class Robot:
         elif choose_method == "manual":
             status = "not safely"
             print(f"use manual diagnostic steps , status = {status} ")    
-   
+
+    def special_action(self):
+        pass 
     
-   
+    def is_alive(self):
+        return self.hull_integrity > 0
 
 
 
@@ -104,6 +107,11 @@ class Medical_Robot (Robot):
     def __init__(self,name, number):
         super().__init__(name)
         self.number = number
+
+    def special_action(self):
+        self.energy += 20
+        self.hull_integrity -=10
+            
         
     def lost_energy (self,lost):
         
@@ -165,7 +173,9 @@ class Medical_Robot (Robot):
             print(f"{self.name} healing - restore {healing}HP " )
 
     def my_med_rob(self):
-        print(f"My Medical Robot {self.name} number = {self.number} can healing status of energy - {self.energy} and hull integrity = {self.hull_integrity} %")
+        self.command4 = (f"My Medical Robot {self.name} number = {self.number} can healing status of energy - {self.energy} and hull integrity = {self.hull_integrity} %")
+        print (self.command4)
+        return self.command4
 
 
 
@@ -173,7 +183,7 @@ med1 = Medical_Robot("Robo1","47")
 med2 = Medical_Robot("Robo2","55")
 
 med1.lost_hull(10)
-med1.repair(5)  
+med1.repair()  
 
 med1.lost_energy(10)
 med1.heal(20)
@@ -185,9 +195,12 @@ med2.my_med_rob()
 
 
 class Military_Robot(Robot):
-    def __init__(self, name):
+    def __init__(self, name,shield = 30,  bonus_energy = 30 ):
         super().__init__(name)
-    
+        self.shield = shield
+        self.bonus_energy = bonus_energy
+        self.hull_integrity += shield
+        self.energy += bonus_energy
 
         self.weapon = {
             "laser" : 200,
@@ -195,23 +208,58 @@ class Military_Robot(Robot):
             "plasma": 100
                       }
     
+    def special_action(self):
+        self.hull_integrity +=40
+        self.energy -= 30
+        
+
     def attack (self,weapon ):
         damage= {
             "laser":1,
             "cannon":2,
             "plasma":4
              }
-        
+
+    
          
 
-        if self.weapon[weapon] <= 0:
-            print("no ammo")
-            return
 
         self.weapon[weapon] -= 1  
 
         self.hull_integrity = max(0, self.hull_integrity - damage[weapon])
     
+        
+    
+
+
+
+    def autodestruction (self):
+        self.hull_integrity =  max(0, self.hull_integrity-200)
+        print (f"Overkill ! , your robo - {self.name} has been destroyed ")
+        return self.hull_integrity
+                
+    def military_robot (self):
+        self.command5 = (f"My military robot - {self.name}  has {self.energy} , hull integrity = {self.hull_integrity}%  shield - {self.shield} cells \
+        , do moves - {self.moves} and SM - {self.memory} has self weapon - {self.weapon} ")
+        print(self.command5)
+       
+
+
+
+mil1 = Military_Robot("Robo1") 
+mil2 = Military_Robot("Robo2")
+
+mil2.autodestruction()
+
+mil1.military_robot()
+mil2.military_robot()
+
+
+
+robots = [rob1, rob2, med1, med2, mil1, mil2 ]
+for robot in robots:
+    if robot.is_alive():
+        robot.special_action()
 
         
 
